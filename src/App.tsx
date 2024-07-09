@@ -1,11 +1,14 @@
-import { View } from "@react-three/drei";
+import { OrbitControls, View } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
+import { Hero } from "./components/Hero";
 import { Item1 } from "./grid/Item1";
 import { Item2 } from "./grid/Item2";
 import { Item3 } from "./grid/Item3";
 import { Item4 } from "./grid/Item4";
+import { Item5 } from "./grid/Item5";
+import { Item6 } from "./grid/Item6";
 
 const Upcoming = () => {
   return (
@@ -33,7 +36,7 @@ const Upcoming = () => {
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
     <View
-      className="flex items-center from-black to-[#181818] bg-gradient-to-br justify-center duration-300 border rounded-md hover:transition-opacity text-white/20 border-white/10 hover:border-white/20 aspect-square hover:bg-white/5"
+      className="flex items-center from-[#111111] to-[#181818] bg-gradient-to-br justify-center duration-300 border rounded-md hover:transition-opacity text-white/20 border-white/10 hover:border-white/10 aspect-square hover:bg-white/5"
       style={{ position: "relative", overflow: "hidden" }}
     >
       {children}
@@ -43,7 +46,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
 
 const GridItem = ({ children }: { children?: ReactNode }) => {
   return (
-    <div className="flex items-center justify-center duration-300 border rounded-md hover:transition-opacity text-white/20 border-white/10 hover:border-white/20 aspect-square hover:bg-white/5">
+    <div className="flex items-center justify-center duration-300 border rounded-md hover:transition-opacity text-white/20 border-white/10 hover:border-white/10 aspect-square hover:bg-white/5">
       {children ? children : <Upcoming></Upcoming>}
     </div>
   );
@@ -51,15 +54,10 @@ const GridItem = ({ children }: { children?: ReactNode }) => {
 
 function App() {
   return (
-    <div className="min-h-screen text-white bg-black select-none">
+    <div className="min-h-screen text-white bg-[#0c0c0c] select-none">
       <div className="container p-5 mx-auto ">
-        <div
-          className="w-full aspect-[2560/670] border border-white/20 rounded-md"
-          style={{
-            background: "url(/cover.png) no-repeat center center",
-            backgroundSize: "cover",
-          }}
-        ></div>
+        <Hero></Hero>
+
         <div className="relative mt-5 overflow-hidden">
           <div className="grid h-full gap-5 overflow-hidden grid-clos-1 md:grid-cols-2 lg:grid-cols-4 ">
             <Wrapper>
@@ -73,6 +71,12 @@ function App() {
             </Wrapper>
             <Wrapper>
               <Item4></Item4>
+            </Wrapper>
+            <Wrapper>
+              <Item5></Item5>
+            </Wrapper>
+            <Wrapper>
+              <Item6></Item6>
             </Wrapper>
 
             <GridItem></GridItem>

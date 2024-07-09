@@ -1,6 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.zen-dots-regular {
+  font-family: "Zen Dots", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 ::-webkit-scrollbar {
   width: 8px;

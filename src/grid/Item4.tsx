@@ -51,21 +51,19 @@ export const Item4 = () => {
       thirdLayerRef.current &&
       groupRef.current
     ) {
-      console.log(firstLayerRef);
-
       gsap
         .timeline({
           repeat: -1,
         })
         .to(firstLayerRef.current.rotation, {
           z: Math.PI,
-          duration: 1,
+          duration: 1.5,
         })
         .to(
           secondLayerRef.current.rotation,
           {
             z: Math.PI,
-            duration: 1,
+            duration: 1.5,
             delay: 0.15,
           },
           "<"
@@ -74,7 +72,7 @@ export const Item4 = () => {
           thirdLayerRef.current.rotation,
           {
             z: Math.PI,
-            duration: 1,
+            duration: 1.5,
             delay: 0.25,
           },
           "<"
@@ -83,7 +81,7 @@ export const Item4 = () => {
           groupRef.current.rotation,
           {
             y: Math.PI * 2,
-            duration: 2,
+            duration: 1.75,
           },
           0
         );
