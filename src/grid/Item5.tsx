@@ -30,7 +30,6 @@ const Ball = () => {
           shader.uniforms.uTime = { value: 0 };
           shader.vertexShader = `
             uniform float uTime;
-            // varying vec3 vNormal;
             ${shader.vertexShader}
           `;
           shader.vertexShader = shader.vertexShader.replace(
