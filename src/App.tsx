@@ -9,6 +9,7 @@ import { Item3 } from "./grid/Item3";
 import { Item4 } from "./grid/Item4";
 import { Item5 } from "./grid/Item5";
 import { Item6 } from "./grid/Item6";
+import { Item7 } from "./grid/Item7";
 
 const Upcoming = () => {
   return (
@@ -77,6 +78,10 @@ function App() {
             </Wrapper>
             <Wrapper>
               <Item6></Item6>
+            </Wrapper>
+            <Wrapper>
+              <Item7></Item7>
+              <OrbitControls></OrbitControls>
             </Wrapper>
 
             <GridItem></GridItem>

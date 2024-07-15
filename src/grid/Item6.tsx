@@ -43,7 +43,7 @@ export const Item6 = () => {
       .timeline()
       .to(t, {
         current: 2,
-        duration: 2,
+        duration: 1,
         ease: "none",
         repeat: -1,
         onUpdate: () => {
@@ -56,9 +56,9 @@ export const Item6 = () => {
       .to(
         tubeRef.current.rotation,
         {
-          y: Math.PI,
-          ease: "none",
-          duration: 1,
+          z: 3 * Math.PI,
+          ease: "power1.inOut",
+          duration: 2,
           repeat: -1,
         },
         "<"

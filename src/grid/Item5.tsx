@@ -4,6 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
 import * as THREE from "three";
+import { CustomeMaterial } from "./material";
 
 const Ball = () => {
   const texture = useTexture("/16.png");
@@ -23,7 +24,7 @@ const Ball = () => {
   return (
     <mesh>
       <icosahedronGeometry args={[1.8, 64]}></icosahedronGeometry>
-      <meshMatcapMaterial
+      <CustomeMaterial
         map={texture}
         ref={materialRef}
         onBeforeCompile={(shader) => {
@@ -63,15 +64,13 @@ const Ball = () => {
             `
           );
 
-          console.log(shader);
-
           if (materialRef.current) {
             materialRef.current.userData = {
               shader,
             };
           }
         }}
-      ></meshMatcapMaterial>
+      ></CustomeMaterial>
     </mesh>
   );
 };

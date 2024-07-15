@@ -4,7 +4,7 @@ export const Hero = () => {
       <div className="text-md sm:text-xl lg:text-2xl">
         16+ 3D Motion Graphics
       </div>
-      <div className="text-5xl sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl">
+      <div className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text ">
         ORIGAMI
       </div>
 
