@@ -1,116 +1,90 @@
 import { Center, Instance, Instances } from "@react-three/drei";
 
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 
+const quarterCylinder = () => {
+  const quarterCylinder = new THREE.Shape();
+  quarterCylinder.moveTo(0, 0);
+  quarterCylinder.absarc(0, 0, 2, 0, Math.PI / 2, false);
+  quarterCylinder.lineTo(0, 0);
+  const extrudeSettings = {
+    steps: 1,
+    depth: 0.5,
+    bevelEnabled: false,
+  };
+  const geometry = new THREE.ExtrudeGeometry(quarterCylinder, extrudeSettings);
+
+  return geometry;
+};
+
 export const Item4 = () => {
-  const groupRef = useRef<THREE.Group>(null);
-  const firstLayerRef = useRef<THREE.Group>(null);
-  const secondLayerRef = useRef<THREE.Group>(null);
-  const thirdLayerRef = useRef<THREE.Group>(null);
+  const refList = useRef<THREE.Group[]>([]);
 
-  const blockSize = 1;
-  const gap = 0.1;
-  const distance = blockSize + gap;
-
-  const layers = useMemo(() => {
-    const layer1 = [];
-    const layer2 = [];
-    const layer3 = [];
-
-    for (let x = -1; x <= 1; x++) {
-      for (let y = -1; y <= 1; y++) {
-        for (let z = -1; z <= 1; z++) {
-          if (z === -1) {
-            layer1.push(
-              new THREE.Vector3(x * distance, y * distance, z * distance)
-            );
-          } else if (z === 0) {
-            layer2.push(
-              new THREE.Vector3(x * distance, y * distance, z * distance)
-            );
-          } else {
-            layer3.push(
-              new THREE.Vector3(x * distance, y * distance, z * distance)
-            );
-          }
-        }
-      }
-    }
-
-    return [layer1, layer2, layer3];
-  }, [distance]);
+  function getRef(mesh: THREE.Group) {
+    refList.current.push(mesh);
+  }
 
   useGSAP(() => {
-    if (
-      firstLayerRef.current &&
-      secondLayerRef.current &&
-      thirdLayerRef.current &&
-      groupRef.current
-    ) {
-      gsap
-        .timeline({
-          repeat: -1,
-        })
-        .to(firstLayerRef.current.rotation, {
-          z: Math.PI,
-          duration: 1.5,
-        })
-        .to(
-          secondLayerRef.current.rotation,
-          {
-            z: Math.PI,
-            duration: 1.5,
-            delay: 0.15,
-          },
-          "<"
-        )
-        .to(
-          thirdLayerRef.current.rotation,
-          {
-            z: Math.PI,
-            duration: 1.5,
-            delay: 0.25,
-          },
-          "<"
-        )
-        .to(
-          groupRef.current.rotation,
-          {
-            y: Math.PI * 2,
-            duration: 1.75,
-          },
-          0
-        );
-    }
-  }, []);
+    if (refList.current.length === 0) return;
 
+    gsap
+      .timeline({
+        repeat: -1,
+        repeatDelay: 0.5,
+      })
+
+      .to(
+        refList.current.map((item) => item.position),
+        {
+          x: (index) => {
+            return `+=${Math.sin((index / 4) * 2 * Math.PI) * 0.5}`;
+          },
+          z: (index) => {
+            return `+=${Math.cos((index / 4) * 2 * Math.PI) * 0.5}`;
+          },
+          duration: 1.5,
+          ease: "power1.out",
+        }
+      )
+      .to(
+        refList.current.map((item) => item.rotation),
+        {
+          z: `+=${Math.PI}`,
+          duration: 2,
+        },
+        0
+      )
+      .to(
+        refList.current.map((item) => item.position),
+        {
+          x: 0,
+          z: 0,
+          duration: 1.5,
+        },
+        1
+      );
+  }, []);
   return (
     <Center>
-      <group rotation={[0, 0, Math.PI / 8]} scale={1.2}>
-        <group rotation={[0, Math.PI / 2, 0]} scale={0.6} ref={groupRef}>
-          <Instances>
-            <boxGeometry args={[1, 1, 1]}></boxGeometry>
-            <CustomeMaterial></CustomeMaterial>
-
-            <group ref={firstLayerRef}>
-              {layers[0].map((item, index) => {
-                return <Instance key={index} position={item} />;
-              })}
-            </group>
-            <group ref={secondLayerRef}>
-              {layers[1].map((item, index) => {
-                return <Instance key={index} position={item} />;
-              })}
-            </group>
-            <group ref={thirdLayerRef}>
-              {layers[2].map((item, index) => {
-                return <Instance key={index} position={item} />;
-              })}
-            </group>
+      <group rotation={[Math.PI / 2, 0, 0]}>
+        <group>
+          <Instances geometry={quarterCylinder()}>
+            <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
+            {Array.from({ length: 4 }).map((_, index) => {
+              return (
+                <group
+                  ref={getRef}
+                  key={index}
+                  rotation={[0, (index * Math.PI) / 2, 0]}
+                >
+                  <Instance rotation={[Math.PI / 2, 0, 0]} />
+                </group>
+              );
+            })}
           </Instances>
         </group>
       </group>

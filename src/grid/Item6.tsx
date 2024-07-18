@@ -40,7 +40,7 @@ export const Item6 = () => {
     if (!tubeRef.current) return;
 
     gsap
-      .timeline()
+      .timeline({})
       .to(t, {
         current: 2,
         duration: 1,
@@ -53,16 +53,12 @@ export const Item6 = () => {
           ballRef.current.position.set(point.x, point.y, point.z);
         },
       })
-      .to(
-        tubeRef.current.rotation,
-        {
-          z: 3 * Math.PI,
-          ease: "power1.inOut",
-          duration: 2,
-          repeat: -1,
-        },
-        "<"
-      );
+      .to(tubeRef.current.rotation, {
+        z: -Math.PI,
+        ease: "back.out",
+        duration: 1,
+        repeat: -1,
+      });
   }, []);
 
   return (

@@ -56,7 +56,7 @@ const GridItem = ({ children }: { children?: ReactNode }) => {
 
 function App() {
   return (
-    <div className="min-h-screen text-white bg-[#0c0c0c] select-none">
+    <div className="min-h-screen text-white bg-[#0c0c0c] select-none background">
       <div className="container p-5 mx-auto ">
         <Hero></Hero>
 
@@ -73,6 +73,7 @@ function App() {
             </Wrapper>
             <Wrapper>
               <Item4></Item4>
+              <OrbitControls></OrbitControls>
             </Wrapper>
             <Wrapper>
               <Item5></Item5>
@@ -85,7 +86,6 @@ function App() {
             </Wrapper>
             <Wrapper>
               <Item8></Item8>
-              <OrbitControls></OrbitControls>
             </Wrapper>
 
             <GridItem></GridItem>

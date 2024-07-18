@@ -35,7 +35,7 @@ export const Item1 = () => {
       <group rotation={[0, 0, Math.PI / 4]}>
         <group rotation={[0, 0, Math.PI / 2]}>
           <Instances>
-            <cylinderGeometry args={[1, 1, 0.1, 64]}></cylinderGeometry>
+            <cylinderGeometry args={[1, 1, 0.2, 64]}></cylinderGeometry>
             <CustomeMaterial></CustomeMaterial>
             {Array.from({ length: 10 }).map((_, index) => {
               return (

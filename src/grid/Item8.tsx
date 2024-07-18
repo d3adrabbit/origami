@@ -63,8 +63,7 @@ export const Item8 = () => {
       .to(
         groupRef.current.rotation,
         {
-          z: `${2 * Math.PI}`,
-
+          z: `${Math.PI}`,
           duration: 4,
         },
         0

@@ -1,87 +1,118 @@
-import { Center, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { Center, Instance, Instances } from "@react-three/drei";
 
-import { useRef } from "react";
-
-import * as THREE from "three";
+import { useMemo, useRef } from "react";
+import gsap from "gsap";
 import { CustomeMaterial } from "./material";
-
-const Ball = () => {
-  const texture = useTexture("/16.png");
-
-  const materialRef = useRef<THREE.MeshMatcapMaterial>(null);
-
-  useFrame(({ clock }) => {
-    if (materialRef.current) {
-      const shader = materialRef.current.userData.shader;
-
-      if (shader) {
-        shader.uniforms.uTime.value = clock.getElapsedTime();
-      }
-    }
-  });
-
-  return (
-    <mesh>
-      <icosahedronGeometry args={[1.8, 64]}></icosahedronGeometry>
-      <CustomeMaterial
-        map={texture}
-        ref={materialRef}
-        onBeforeCompile={(shader) => {
-          shader.uniforms.uTime = { value: 0 };
-          shader.vertexShader = `
-            uniform float uTime;
-            ${shader.vertexShader}
-          `;
-          shader.vertexShader = shader.vertexShader.replace(
-            "#include <beginnormal_vertex>",
-            `
-              #include <beginnormal_vertex>
-              float wave = sin(position.y * 20.0 + uTime * 10.0) * 0.2;
-              vec3 displacedPosition = position + normal * wave;
-              vec3 displacedNormal = normalMatrix * (displacedPosition - position);
-              vNormal = normalize(displacedNormal);
-            `
-          );
-
-          shader.vertexShader = shader.vertexShader.replace(
-            "#include <begin_vertex>",
-            `
-              #include <begin_vertex>
-              transformed = position + normal * wave;
-            `
-          );
-
-          shader.fragmentShader = `
-
-            ${shader.fragmentShader}
-          `;
-
-          shader.fragmentShader = shader.fragmentShader.replace(
-            "vec2 uv = vec2( dot( x, normal ), dot( y, normal ) ) * 0.495 + 0.5;",
-            `
-              vec2 uv = vec2( dot( x, vNormal ), dot( y, vNormal ) ) * 0.495 + 0.5;
-            `
-          );
-
-          if (materialRef.current) {
-            materialRef.current.userData = {
-              shader,
-            };
-          }
-        }}
-      ></CustomeMaterial>
-    </mesh>
-  );
-};
+import * as THREE from "three";
+import { useGSAP } from "@gsap/react";
 
 export const Item5 = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const firstLayerRef = useRef<THREE.Group>(null);
+  const secondLayerRef = useRef<THREE.Group>(null);
+  const thirdLayerRef = useRef<THREE.Group>(null);
+
+  const blockSize = 1;
+  const gap = 0.1;
+  const distance = blockSize + gap;
+
+  const layers = useMemo(() => {
+    const layer1 = [];
+    const layer2 = [];
+    const layer3 = [];
+
+    for (let x = -1; x <= 1; x++) {
+      for (let y = -1; y <= 1; y++) {
+        for (let z = -1; z <= 1; z++) {
+          if (z === -1) {
+            layer1.push(
+              new THREE.Vector3(x * distance, y * distance, z * distance)
+            );
+          } else if (z === 0) {
+            layer2.push(
+              new THREE.Vector3(x * distance, y * distance, z * distance)
+            );
+          } else {
+            layer3.push(
+              new THREE.Vector3(x * distance, y * distance, z * distance)
+            );
+          }
+        }
+      }
+    }
+
+    return [layer1, layer2, layer3];
+  }, [distance]);
+
+  useGSAP(() => {
+    if (
+      firstLayerRef.current &&
+      secondLayerRef.current &&
+      thirdLayerRef.current &&
+      groupRef.current
+    ) {
+      gsap
+        .timeline({
+          repeat: -1,
+        })
+        .to(firstLayerRef.current.rotation, {
+          z: Math.PI,
+          duration: 1.5,
+        })
+        .to(
+          secondLayerRef.current.rotation,
+          {
+            z: Math.PI,
+            duration: 1.5,
+            delay: 0.15,
+          },
+          "<"
+        )
+        .to(
+          thirdLayerRef.current.rotation,
+          {
+            z: Math.PI,
+            duration: 1.5,
+            delay: 0.25,
+          },
+          "<"
+        )
+        .to(
+          groupRef.current.rotation,
+          {
+            y: Math.PI * 2,
+            duration: 1.75,
+          },
+          0
+        );
+    }
+  }, []);
 
   return (
     <Center>
-      <group ref={groupRef}>
-        <Ball></Ball>
+      <group rotation={[0, 0, Math.PI / 8]} scale={1.2}>
+        <group rotation={[0, Math.PI / 2, 0]} scale={0.6} ref={groupRef}>
+          <Instances>
+            <boxGeometry args={[1, 1, 1]}></boxGeometry>
+            <CustomeMaterial></CustomeMaterial>
+
+            <group ref={firstLayerRef}>
+              {layers[0].map((item, index) => {
+                return <Instance key={index} position={item} />;
+              })}
+            </group>
+            <group ref={secondLayerRef}>
+              {layers[1].map((item, index) => {
+                return <Instance key={index} position={item} />;
+              })}
+            </group>
+            <group ref={thirdLayerRef}>
+              {layers[2].map((item, index) => {
+                return <Instance key={index} position={item} />;
+              })}
+            </group>
+          </Instances>
+        </group>
       </group>
     </Center>
   );
