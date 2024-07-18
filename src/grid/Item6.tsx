@@ -43,7 +43,7 @@ export const Item6 = () => {
       .timeline({})
       .to(t, {
         current: 2,
-        duration: 1,
+        duration: 1.5,
         ease: "none",
         repeat: -1,
         onUpdate: () => {
@@ -53,12 +53,16 @@ export const Item6 = () => {
           ballRef.current.position.set(point.x, point.y, point.z);
         },
       })
-      .to(tubeRef.current.rotation, {
-        z: -Math.PI,
-        ease: "back.out",
-        duration: 1,
-        repeat: -1,
-      });
+      .to(
+        tubeRef.current.rotation,
+        {
+          z: -Math.PI,
+          ease: "back.out",
+          duration: 1.5,
+          repeat: -1,
+        },
+        0
+      );
   }, []);
 
   return (

@@ -16,38 +16,35 @@ export const Item1 = () => {
   useGSAP(() => {
     if (refList.current.length === 0) return;
 
-    refList.current.forEach((mesh, index) => {
-      if (mesh) {
-        gsap.to(mesh.scale, {
-          x: 0.3,
-          z: 0.3,
-          delay: 0.25 * index,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          duration: 1,
-        });
-      }
-    });
+    gsap
+      .timeline({
+        repeat: -1,
+        repeatDelay: 0.5,
+      })
+      .to(
+        refList.current.map((item) => item.rotation),
+        {
+          y: `+=${Math.PI * 2}`,
+          x: `-=${Math.PI * 2}`,
+
+          duration: 1.5,
+          stagger: {
+            each: 0.15,
+          },
+        }
+      );
   }, []);
   return (
     <Center>
-      <group rotation={[0, 0, Math.PI / 4]}>
-        <group rotation={[0, 0, Math.PI / 2]}>
-          <Instances>
-            <cylinderGeometry args={[1, 1, 0.2, 64]}></cylinderGeometry>
-            <CustomeMaterial></CustomeMaterial>
-            {Array.from({ length: 10 }).map((_, index) => {
-              return (
-                <Instance
-                  ref={getRef}
-                  key={index}
-                  position={[0, 0.5 * index, 2]}
-                />
-              );
-            })}
-          </Instances>
-        </group>
+      <group>
+        {Array.from({ length: 4 }).map((_, index) => {
+          return (
+            <mesh key={index} ref={getRef}>
+              <torusGeometry args={[(index + 1) * 0.5, 0.1]}></torusGeometry>
+              <CustomeMaterial></CustomeMaterial>
+            </mesh>
+          );
+        })}
       </group>
     </Center>
   );

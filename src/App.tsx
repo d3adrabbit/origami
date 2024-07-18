@@ -11,6 +11,8 @@ import { Item5 } from "./grid/Item5";
 import { Item6 } from "./grid/Item6";
 import { Item7 } from "./grid/Item7";
 import { Item8 } from "./grid/Item8";
+import { Item9 } from "./grid/Item9";
+import { Item10 } from "./grid/Item10";
 
 const Upcoming = () => {
   return (
@@ -73,7 +75,6 @@ function App() {
             </Wrapper>
             <Wrapper>
               <Item4></Item4>
-              <OrbitControls></OrbitControls>
             </Wrapper>
             <Wrapper>
               <Item5></Item5>
@@ -87,9 +88,12 @@ function App() {
             <Wrapper>
               <Item8></Item8>
             </Wrapper>
-
-            <GridItem></GridItem>
-            <GridItem></GridItem>
+            <Wrapper>
+              <Item9></Item9>
+            </Wrapper>
+            <Wrapper>
+              <Item10></Item10>
+            </Wrapper>
             <GridItem></GridItem>
             <GridItem></GridItem>
           </div>
