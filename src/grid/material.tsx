@@ -7,7 +7,7 @@ export const CustomeMaterial = forwardRef<
   MeshMatcapMaterial,
   MeshMatcapMaterialProps
 >((props, ref) => {
-  const texture = useTexture("/wine.png");
+  const texture = useTexture("/metal.png");
   return (
     <meshMatcapMaterial
       {...props}

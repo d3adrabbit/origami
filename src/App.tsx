@@ -13,6 +13,8 @@ import { Item7 } from "./grid/Item7";
 import { Item8 } from "./grid/Item8";
 import { Item9 } from "./grid/Item9";
 import { Item10 } from "./grid/Item10";
+import { Item11 } from "./grid/Item11";
+import { Item12 } from "./grid/Item12";
 
 const Upcoming = () => {
   return (
@@ -59,7 +61,7 @@ const GridItem = ({ children }: { children?: ReactNode }) => {
 function App() {
   return (
     <div className="min-h-screen text-white bg-[#0c0c0c] select-none background">
-      <div className="container p-5 mx-auto ">
+      <div className="container p-5 pb-20 mx-auto ">
         <Hero></Hero>
 
         <div className="relative mt-5 overflow-hidden">
@@ -94,8 +96,12 @@ function App() {
             <Wrapper>
               <Item10></Item10>
             </Wrapper>
-            <GridItem></GridItem>
-            <GridItem></GridItem>
+            <Wrapper>
+              <Item11></Item11>
+            </Wrapper>
+            <Wrapper>
+              <Item12></Item12>
+            </Wrapper>
           </div>
 
           <div className="fixed top-0 left-0 w-full h-screen pointer-events-none ">

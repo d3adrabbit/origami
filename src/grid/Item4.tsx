@@ -6,87 +6,77 @@ import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 
-const quarterCylinder = () => {
-  const quarterCylinder = new THREE.Shape();
-  quarterCylinder.moveTo(0, 0);
-  quarterCylinder.absarc(0, 0, 2, 0, Math.PI / 2, false);
-  quarterCylinder.lineTo(0, 0);
-  const extrudeSettings = {
-    steps: 1,
-    depth: 0.5,
-    bevelEnabled: false,
-  };
-  const geometry = new THREE.ExtrudeGeometry(quarterCylinder, extrudeSettings);
-
-  return geometry;
-};
-
 export const Item4 = () => {
-  const refList = useRef<THREE.Group[]>([]);
-
-  function getRef(mesh: THREE.Group) {
-    refList.current.push(mesh);
-  }
+  const ring1Ref = useRef<THREE.Mesh>(null);
+  const ring2Ref = useRef<THREE.Mesh>(null);
+  const cone1Ref = useRef<THREE.Mesh>(null);
+  const cone2Ref = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
   useGSAP(() => {
-    if (refList.current.length === 0) return;
+    if (
+      ring1Ref.current &&
+      ring2Ref.current &&
+      cone1Ref.current &&
+      cone2Ref.current &&
+      groupRef.current
+    ) {
+      gsap
+        .timeline({
+          repeat: -1,
+        })
+        .to(
+          ring1Ref.current.rotation,
+          {
+            z: `+=${Math.PI * 2}`,
+            x: `+=${Math.PI * 2}`,
 
-    gsap
-      .timeline({
-        repeat: -1,
-        repeatDelay: 0.5,
-      })
+            duration: 4,
+            ease: "none",
+          },
+          0
+        )
+        .to(
+          ring2Ref.current.rotation,
+          {
+            z: `-=${Math.PI * 2}`,
+            x: `-=${Math.PI * 2}`,
 
-      .to(
-        refList.current.map((item) => item.position),
-        {
-          x: (index) => {
-            return `+=${Math.sin((index / 4) * 2 * Math.PI) * 0.5}`;
+            ease: "none",
+            duration: 4,
           },
-          z: (index) => {
-            return `+=${Math.cos((index / 4) * 2 * Math.PI) * 0.5}`;
+          0
+        )
+        .to(
+          groupRef.current.rotation,
+          {
+            y: Math.PI * 2,
+            duration: 4,
+            ease: "none",
           },
-          duration: 1.5,
-          ease: "power1.out",
-        }
-      )
-      .to(
-        refList.current.map((item) => item.rotation),
-        {
-          z: `+=${Math.PI}`,
-          duration: 2,
-        },
-        0
-      )
-      .to(
-        refList.current.map((item) => item.position),
-        {
-          x: 0,
-          z: 0,
-          duration: 1.5,
-        },
-        1
-      );
+          0
+        );
+    }
   }, []);
   return (
-    <Center>
-      <group rotation={[Math.PI / 2, 0, 0]}>
-        <group>
-          <Instances geometry={quarterCylinder()}>
-            <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
-            {Array.from({ length: 4 }).map((_, index) => {
-              return (
-                <group
-                  ref={getRef}
-                  key={index}
-                  rotation={[0, (index * Math.PI) / 2, 0]}
-                >
-                  <Instance rotation={[Math.PI / 2, 0, 0]} />
-                </group>
-              );
-            })}
-          </Instances>
-        </group>
+    <Center ref={groupRef}>
+      <mesh ref={ring1Ref}>
+        <torusGeometry args={[2.1, 0.1]}></torusGeometry>
+        <CustomeMaterial></CustomeMaterial>
+      </mesh>
+      <mesh ref={ring2Ref} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.8, 0.1]}></torusGeometry>
+        <CustomeMaterial></CustomeMaterial>
+      </mesh>
+      <group scale={0.8}>
+        <mesh position={[0, 1, 0]} rotation={[0, 0, 0]} ref={cone1Ref}>
+          <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
+          <CustomeMaterial></CustomeMaterial>
+        </mesh>
+        <mesh position={[0, -1, 0]} rotation={[-Math.PI, 0, 0]} ref={cone2Ref}>
+          <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
+          <CustomeMaterial></CustomeMaterial>
+        </mesh>
       </group>
     </Center>
   );

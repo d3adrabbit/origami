@@ -6,40 +6,88 @@ import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 
-export const Item10 = () => {
-  const refList = useRef<THREE.Mesh[]>([]);
+const quarterCylinder = () => {
+  const quarterCylinder = new THREE.Shape();
+  quarterCylinder.moveTo(0, 0);
+  quarterCylinder.absarc(0, 0, 2, 0, Math.PI / 2, false);
+  quarterCylinder.lineTo(0, 0);
+  const extrudeSettings = {
+    steps: 1,
+    depth: 0.5,
+    bevelEnabled: false,
+  };
+  const geometry = new THREE.ExtrudeGeometry(quarterCylinder, extrudeSettings);
 
-  function getRef(mesh: THREE.Mesh) {
+  return geometry;
+};
+
+export const Item10 = () => {
+  const refList = useRef<THREE.Group[]>([]);
+
+  function getRef(mesh: THREE.Group) {
     refList.current.push(mesh);
   }
 
   useGSAP(() => {
     if (refList.current.length === 0) return;
 
-    refList.current.forEach((mesh, index) => {
-      if (mesh) {
-        gsap.to(mesh.scale, {
-          x: 0.3,
-          z: 0.3,
-          delay: 0.25 * index,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          duration: 1,
-        });
-      }
-    });
+    gsap
+      .timeline({
+        repeat: -1,
+        repeatDelay: 0.5,
+      })
+
+      .to(
+        refList.current.map((item) => item.position),
+        {
+          x: (index) => {
+            return `+=${Math.sin((index / 4) * 2 * Math.PI) * 0.5}`;
+          },
+          z: (index) => {
+            return `+=${Math.cos((index / 4) * 2 * Math.PI) * 0.5}`;
+          },
+          duration: 1.5,
+          ease: "power1.out",
+        }
+      )
+      .to(
+        refList.current.map((item) => item.rotation),
+        {
+          z: `+=${Math.PI}`,
+          duration: 2,
+        },
+        0
+      )
+      .to(
+        refList.current.map((item) => item.position),
+        {
+          x: 0,
+          z: 0,
+          duration: 1.5,
+        },
+        1
+      );
   }, []);
   return (
-    <Center scale={1.2}>
-      <mesh position={[0, 1, 0]} rotation={[0, 0, 0]}>
-        <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
-        <CustomeMaterial></CustomeMaterial>
-      </mesh>
-      <mesh position={[0, -1, 0]} rotation={[-Math.PI, 0, 0]}>
-        <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
-        <CustomeMaterial></CustomeMaterial>
-      </mesh>
+    <Center scale={0.95}>
+      <group rotation={[Math.PI / 2, 0, 0]}>
+        <group>
+          <Instances geometry={quarterCylinder()}>
+            <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
+            {Array.from({ length: 4 }).map((_, index) => {
+              return (
+                <group
+                  ref={getRef}
+                  key={index}
+                  rotation={[0, (index * Math.PI) / 2, 0]}
+                >
+                  <Instance rotation={[Math.PI / 2, 0, 0]} />
+                </group>
+              );
+            })}
+          </Instances>
+        </group>
+      </group>
     </Center>
   );
 };

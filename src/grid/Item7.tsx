@@ -40,14 +40,14 @@ export const Item7 = () => {
 
   return (
     <Center scale={3} rotation={[Math.PI / 10, Math.PI / 4, 0]}>
-      {Array.from({ length: 3 }).map((_, index) => {
+      {Array.from({ length: 5 }).map((_, index) => {
         return (
           <RoundedBox
             ref={getRef}
-            args={[1, 0.2, 1]}
+            args={[1, 0.1, 1]}
             key={index}
             radius={0.02}
-            position={[0, (index - 1) * 0.25, 0]}
+            position={[0, (index - 1) * 0.1, 0]}
           >
             <CustomeMaterial></CustomeMaterial>
           </RoundedBox>
