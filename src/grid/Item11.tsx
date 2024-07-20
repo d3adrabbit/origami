@@ -4,6 +4,7 @@ import { useRef, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { CustomeMaterial } from "./material";
 
+// Inspired by https://www.shadertoy.com/view/sdsXWr
 export const Item11 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
 

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const textures = ["/metal.png", "/wine.png", "0A0A0A_A9A9A9_525252_747474.png"];
+const textures = ["1.jpeg", "2.jpeg", "3.jpeg"];
 
 interface Store {
   texture: string;
