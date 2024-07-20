@@ -3,15 +3,13 @@ import { create } from "zustand";
 const textures = ["1.jpeg", "2.jpeg", "3.jpeg"];
 
 interface Store {
+  index: number;
   texture: string;
-  getNext: () => void;
+  setIndex: (num: number) => void;
 }
 
 export const useStore = create<Store>((set) => ({
+  index: 0,
   texture: textures[0],
-  getNext: () =>
-    set((state) => ({
-      texture:
-        textures[(textures.indexOf(state.texture) + 1) % textures.length],
-    })),
+  setIndex: (num: number) => set({ index: num, texture: textures[num] }),
 }));
