@@ -1,32 +1,39 @@
 import { Center, Instance, Instances } from "@react-three/drei";
 
-import { useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 
-const quarterCylinder = () => {
-  const quarterCylinder = new THREE.Shape();
-  quarterCylinder.moveTo(0, 0);
-  quarterCylinder.absarc(0, 0, 2, 0, Math.PI / 2, false);
-  quarterCylinder.lineTo(0, 0);
-  const extrudeSettings = {
-    steps: 1,
-    depth: 0.5,
-    bevelEnabled: false,
-  };
-  const geometry = new THREE.ExtrudeGeometry(quarterCylinder, extrudeSettings);
-
-  return geometry;
-};
-
 export const Item10 = () => {
   const refList = useRef<THREE.Group[]>([]);
 
-  function getRef(mesh: THREE.Group) {
-    refList.current.push(mesh);
-  }
+  const geometry = useMemo(() => {
+    const shape = new THREE.Shape();
+
+    // Outer arc
+    shape.absarc(0, 0, 1, 0, Math.PI / 2, false);
+    shape.lineTo(Math.cos(Math.PI / 2) * 0.5, Math.sin(Math.PI / 2) * 0.5);
+
+    // Inner arc
+    shape.absarc(0, 0, 0.2, Math.PI / 2, 0, true);
+    shape.lineTo(1, 0);
+
+    const extrudeSettings = {
+      steps: 1,
+      depth: 0.3,
+      bevelEnabled: false,
+    };
+
+    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  }, []);
+
+  const getRef = useCallback((mesh: THREE.Group) => {
+    if (mesh && !refList.current.includes(mesh)) {
+      refList.current.push(mesh);
+    }
+  }, []);
 
   useGSAP(() => {
     if (refList.current.length === 0) return;
@@ -34,6 +41,7 @@ export const Item10 = () => {
     gsap
       .timeline({
         repeat: -1,
+
         repeatDelay: 0.5,
       })
 
@@ -69,10 +77,10 @@ export const Item10 = () => {
       );
   }, []);
   return (
-    <Center scale={0.95}>
+    <Center scale={1.6}>
       <group rotation={[Math.PI / 2, 0, 0]}>
         <group>
-          <Instances geometry={quarterCylinder()}>
+          <Instances geometry={geometry}>
             <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
             {Array.from({ length: 4 }).map((_, index) => {
               return (

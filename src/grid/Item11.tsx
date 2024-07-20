@@ -7,9 +7,11 @@ import { CustomeMaterial } from "./material";
 export const Item11 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
 
-  function getRef(mesh: THREE.Mesh) {
-    refList.current.push(mesh);
-  }
+  const getRef = useCallback((mesh: THREE.Mesh) => {
+    if (mesh && !refList.current.includes(mesh)) {
+      refList.current.push(mesh);
+    }
+  }, []);
 
   const rotate = useMemo(
     () => (a: number) => {

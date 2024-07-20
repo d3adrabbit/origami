@@ -6,7 +6,7 @@ import {
   RoundedBox,
 } from "@react-three/drei";
 
-import { useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
@@ -17,9 +17,11 @@ import React from "react";
 export const Item7 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
 
-  function getRef(mesh: THREE.Mesh) {
-    refList.current.push(mesh);
-  }
+  const getRef = useCallback((mesh: THREE.Mesh) => {
+    if (mesh && !refList.current.includes(mesh)) {
+      refList.current.push(mesh);
+    }
+  }, []);
 
   useGSAP(() => {
     if (refList.current.length === 0) return;

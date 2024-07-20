@@ -35,6 +35,9 @@ dependencies:
   three:
     specifier: ^0.166.1
     version: 0.166.1
+  zustand:
+    specifier: ^4.5.4
+    version: 4.5.4(@types/react@18.3.3)(react@18.3.1)
 
 devDependencies:
   '@types/react':

@@ -1,6 +1,6 @@
 import { Center, Instance, Instances } from "@react-three/drei";
 
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
@@ -9,9 +9,11 @@ import { useGSAP } from "@gsap/react";
 export const Item9 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
 
-  function getRef(mesh: THREE.Mesh) {
-    refList.current.push(mesh);
-  }
+  const getRef = useCallback((mesh: THREE.Mesh) => {
+    if (mesh && !refList.current.includes(mesh)) {
+      refList.current.push(mesh);
+    }
+  }, []);
 
   useGSAP(() => {
     if (refList.current.length === 0) return;
