@@ -66,7 +66,7 @@ export const Item6 = () => {
   }, []);
 
   return (
-    <Center scale={0.8}>
+    <group scale={0.8}>
       <mesh ref={ballRef} position={[0, 2, 0]}>
         <sphereGeometry args={[0.7]}></sphereGeometry>
         <CustomeMaterial></CustomeMaterial>
@@ -76,6 +76,6 @@ export const Item6 = () => {
         <tubeGeometry args={[path, 20, 0.8, 8, false]}></tubeGeometry>
         <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
       </mesh>
-    </Center>
+    </group>
   );
 };

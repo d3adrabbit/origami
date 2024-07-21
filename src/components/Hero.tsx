@@ -41,7 +41,7 @@ export const Hero = () => {
                     key === index
                       ? "text-white/100 bg-white/20"
                       : "text-white/60 bg-white/5 "
-                  }  flex items-center justify-center w-6 h-6  md:w-8 md:h-8 transition-colors duration-300  cursor-pointer  bg-white/10 hover:bg-white/15  hover:text-white`}
+                  }  flex items-center justify-center rounded-sm w-6 h-6  md:w-8 md:h-8 transition-colors duration-300  cursor-pointer  bg-white/10 hover:bg-white/15  hover:text-white`}
                   onClick={() => {
                     setIndex(key);
                   }}

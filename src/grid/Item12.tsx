@@ -6,26 +6,6 @@ import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 
-const arrow = () => {
-  const shape = new THREE.Shape();
-  shape.moveTo(0, 0);
-  shape.lineTo(1, 1);
-  shape.lineTo(0.5, 1);
-  shape.lineTo(0.5, 2);
-  shape.lineTo(-0.5, 2);
-  shape.lineTo(-0.5, 1);
-  shape.lineTo(-1, 1);
-  shape.lineTo(0, 0);
-
-  const extrudeSettings = {
-    depth: 0.5,
-    bevelEnabled: false,
-  };
-
-  const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-  return geometry;
-};
-
 export const Item12 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
   const groupRef = useRef<THREE.Group>(null);
@@ -34,6 +14,25 @@ export const Item12 = () => {
     if (mesh && !refList.current.includes(mesh)) {
       refList.current.push(mesh);
     }
+  }, []);
+
+  const arrow = useMemo(() => {
+    const shape = new THREE.Shape();
+    shape.moveTo(0, 0);
+    shape.lineTo(1, 1);
+    shape.lineTo(0.5, 1);
+    shape.lineTo(0.5, 2);
+    shape.lineTo(-0.5, 2);
+    shape.lineTo(-0.5, 1);
+    shape.lineTo(-1, 1);
+    shape.lineTo(0, 0);
+
+    const extrudeSettings = {
+      depth: 0.5,
+      bevelEnabled: false,
+    };
+
+    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
   }, []);
 
   useGSAP(() => {
@@ -82,7 +81,7 @@ export const Item12 = () => {
         <boxGeometry></boxGeometry>
         <CustomeMaterial></CustomeMaterial>
       </mesh>
-      <Instances geometry={arrow()}>
+      <Instances geometry={arrow}>
         <CustomeMaterial></CustomeMaterial>
         {arrows.map((item, index) => {
           return (
