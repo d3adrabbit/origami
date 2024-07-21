@@ -1,5 +1,4 @@
-import { Center, Instance, Instances } from "@react-three/drei";
-
+import { Instance, Instances } from "@react-three/drei";
 import { useCallback, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";

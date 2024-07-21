@@ -1,18 +1,9 @@
-import {
-  Center,
-  Instance,
-  Instances,
-  OrbitControls,
-  RoundedBox,
-} from "@react-three/drei";
-
-import { useMemo, useRef } from "react";
+import { Center } from "@react-three/drei";
+import { useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
-import { useFrame, useThree } from "@react-three/fiber";
-import React from "react";
 
 export const Item8 = () => {
   const ref1 = useRef<THREE.Mesh>(null);

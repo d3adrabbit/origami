@@ -1,11 +1,8 @@
-import { Center, Instance, Instances, OrbitControls } from "@react-three/drei";
-
 import { useMemo, useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
-import { useFrame, useThree } from "@react-three/fiber";
 
 class SemiCircleCurve extends THREE.Curve<THREE.Vector3> {
   scale: number;

@@ -1,5 +1,4 @@
-import { Center, Instance, Instances } from "@react-three/drei";
-
+import { Center } from "@react-three/drei";
 import { useRef } from "react";
 import gsap from "gsap";
 import { CustomeMaterial } from "./material";
