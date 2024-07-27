@@ -18,12 +18,12 @@ import { Item12 } from "./grid/Item12";
 
 const Wrapper = ({ name, children }: { name: string; children: ReactNode }) => {
   return (
-    <div className="relative rounded-md cursor-pointer bg-white/10 card">
-      <View className="flex z-[2] m-[1px] bg-[#171717]  aspect-square  relative rounded-md ">
+    <div className="relative rounded-md cursor-pointer bg-white/10 card p-[1px]">
+      <View className="flex z-[2] bg-[#171717]  aspect-square  relative rounded-t-md">
         {children}
       </View>
 
-      <div className="flex items-center justify-between w-full px-4 py-2">
+      <div className="relative z-20 flex items-center mt-[1px] justify-between  w-full px-4 py-2 bg-[#171717] rounded-b-md">
         <span className="w-1 h-1 rounded-full bg-white/20"></span>
         <span className="">{name}</span>
         <span className="w-1 h-1 rounded-full bg-white/20"></span>
