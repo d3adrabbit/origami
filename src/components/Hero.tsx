@@ -29,7 +29,7 @@ export const Hero = () => {
         </div>
 
         <div className="flex items-center ">
-          <div className="hidden text-lg text-white/60 md:block">
+          <div className="hidden text-xs text-white/60 md:block">
             VARIATIONS
           </div>
           <div className="flex ml-4 space-x-2">
@@ -56,20 +56,20 @@ export const Hero = () => {
       <div className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text ">
         ORIGAMI
       </div>
-      <div className="flex flex-col justify-around text-xs border lg:flex-row md:text-sm border-white/10">
+      <div className="flex flex-col justify-around text-xs border lg:flex-row md:text-s border-white/10">
         <div className="px-2 py-2 sm:px-4">
-          <Link href="https://tympanus.net/codrops/">©️ 2024 Codrops</Link>
+          ©️ 2024 <Link href="https://x.com/codrops">Codrops</Link> &amp; <Link href="https://x.com/deadrabbbbit">deadrabbbbit</Link>
         </div>
         <div className="flex justify-between flex-grow px-2 py-2 sm:px-4 lg:justify-around border-white/10 md:border-x">
-          <Link href="https://threejs.org/">Three.js</Link>
+          <Link href="https://tympanus.net/codrops/demos/?tag=webgl">webgl</Link>
           <div className="hidden sm:inline-block">▲</div>
-          <Link href="https://docs.pmnd.rs/react-three-fiber/getting-started/introduction">R3F</Link>
+          <Link href="https://tympanus.net/codrops/demos/?tag=three-js">three.js</Link>
           <div className="hidden sm:inline-block">▲</div>
-          <Link href="https://gsap.com/">GSAP</Link>
+          <Link href="https://tympanus.net/codrops/demos/?tag=react-three-fiber">R3F</Link>
           <div className="hidden sm:inline-block">▲</div>
+          <Link href="https://tympanus.net/codrops/demos/?tag=3d">3D</Link>
         </div>
         <div className="flex px-2 py-2 space-x-4 sm:px-4 lg:justify-around">
-          <Link href="https://x.com/deadrabbbbit">X</Link>
           <Link href="https://github.com/d3adrabbit/origami">GitHub</Link>
           <Link href="https://tympanus.net/codrops/?p=79782">Article</Link>
         </div>
