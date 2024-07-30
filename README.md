@@ -1,8 +1,10 @@
-# 3D Motion Graphics
+# Origami: Free 3D Motion Graphics
 
-[Article on Codrops]()
+![3d motion graphics](https://tympanus.net/codrops/wp-content/uploads/2024/07/3dmotiongraphics_01-2.jpg)
 
-[Demo]()
+[Article on Codrops](https://tympanus.net/codrops/?p=79782)
+
+[Demo](https://tympanus.net/Development/Origami/)
 
 ## Installation
 
@@ -50,4 +52,4 @@ Follow Codrops: [X](http://www.X.com/codrops), [Facebook](http://www.facebook.co
 
 [MIT](LICENSE)
 
-Made with :blue_heart: by [Codrops](http://www.codrops.com)
+Made with :blue_heart: by [deadrabbbbit](https://x.com/deadrabbbbit) and [Codrops](http://www.codrops.com)
