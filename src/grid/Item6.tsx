@@ -1,8 +1,8 @@
-import { useMemo, useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 class SemiCircleCurve extends THREE.Curve<THREE.Vector3> {
   scale: number;
@@ -66,12 +66,12 @@ export const Item6 = () => {
     <group scale={0.8}>
       <mesh ref={ballRef} position={[0, 2, 0]}>
         <sphereGeometry args={[0.7]}></sphereGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
 
       <mesh rotation={[0, 0, Math.PI]} ref={tubeRef}>
         <tubeGeometry args={[path, 20, 0.8, 8, false]}></tubeGeometry>
-        <CustomeMaterial side={THREE.DoubleSide}></CustomeMaterial>
+        <CustomMaterial side={THREE.DoubleSide}></CustomMaterial>
       </mesh>
     </group>
   );

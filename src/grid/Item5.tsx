@@ -1,9 +1,9 @@
-import { Center, Instance, Instances } from "@react-three/drei";
-import { useMemo, useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import { Center, Instance, Instances } from "@react-three/drei";
+import gsap from "gsap";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 export const Item5 = () => {
   const groupRef = useRef<THREE.Group>(null);
@@ -93,7 +93,7 @@ export const Item5 = () => {
         <group rotation={[0, Math.PI / 2, 0]} scale={0.6} ref={groupRef}>
           <Instances>
             <boxGeometry args={[1, 1, 1]}></boxGeometry>
-            <CustomeMaterial></CustomeMaterial>
+            <CustomMaterial></CustomMaterial>
 
             <group ref={firstLayerRef}>
               {layers[0].map((item, index) => {

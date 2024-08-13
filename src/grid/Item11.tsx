@@ -1,8 +1,8 @@
 import { Instance, Instances } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useMemo, useCallback } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { CustomeMaterial } from "./material";
+import { CustomMaterial } from "./material";
 
 // Inspired by https://www.shadertoy.com/view/sdsXWr
 export const Item11 = () => {
@@ -70,7 +70,7 @@ export const Item11 = () => {
     <group scale={0.55}>
       <Instances>
         <sphereGeometry args={[1, 32, 32]} />
-        <CustomeMaterial />
+        <CustomMaterial />
         {Array.from({ length: 5 }).map((_, index) => (
           <Instance
             ref={getRef}

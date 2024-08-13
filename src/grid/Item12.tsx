@@ -1,9 +1,9 @@
-import { Instance, Instances } from "@react-three/drei";
-import { useCallback, useMemo, useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import { Instance, Instances } from "@react-three/drei";
+import gsap from "gsap";
+import { useCallback, useMemo, useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 export const Item12 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
@@ -78,10 +78,10 @@ export const Item12 = () => {
     <group scale={0.7} ref={groupRef}>
       <mesh>
         <boxGeometry></boxGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
       <Instances geometry={arrow}>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
         {arrows.map((item, index) => {
           return (
             <Instance

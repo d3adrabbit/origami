@@ -1,10 +1,10 @@
 import { Center } from "@react-three/drei";
 
-import { useCallback, useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useCallback, useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 export const Item1 = () => {
   const refList = useRef<THREE.Mesh[]>([]);
@@ -42,7 +42,7 @@ export const Item1 = () => {
           return (
             <mesh key={index} ref={getRef}>
               <torusGeometry args={[(index + 1) * 0.5, 0.1]}></torusGeometry>
-              <CustomeMaterial></CustomeMaterial>
+              <CustomMaterial></CustomMaterial>
             </mesh>
           );
         })}

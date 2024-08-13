@@ -1,9 +1,9 @@
-import { Center } from "@react-three/drei";
-import { useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import { Center } from "@react-three/drei";
+import gsap from "gsap";
+import { useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 export const Item8 = () => {
   const ref1 = useRef<THREE.Mesh>(null);
@@ -65,17 +65,17 @@ export const Item8 = () => {
     <Center ref={groupRef}>
       <mesh position={[1.5, 1, 0]} rotation={[Math.PI / 2, 0, 0]} ref={ref1}>
         <cylinderGeometry args={[0.5, 0.5]}></cylinderGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
 
       <mesh>
         <boxGeometry args={[4, 0.4, 1]}></boxGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
 
       <mesh position={[-1.5, -1, 0]} rotation={[Math.PI / 2, 0, 0]} ref={ref2}>
         <cylinderGeometry args={[0.5, 0.5]}></cylinderGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
     </Center>
   );

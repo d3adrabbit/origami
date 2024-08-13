@@ -1,9 +1,9 @@
-import { Center } from "@react-three/drei";
-import { useRef } from "react";
-import gsap from "gsap";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
+import { Center } from "@react-three/drei";
+import gsap from "gsap";
+import { useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 export const Item4 = () => {
   const ring1Ref = useRef<THREE.Mesh>(null);
@@ -61,20 +61,20 @@ export const Item4 = () => {
     <Center ref={groupRef}>
       <mesh ref={ring1Ref}>
         <torusGeometry args={[2.1, 0.1]}></torusGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
       <mesh ref={ring2Ref} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.8, 0.1]}></torusGeometry>
-        <CustomeMaterial></CustomeMaterial>
+        <CustomMaterial></CustomMaterial>
       </mesh>
       <group scale={0.8}>
         <mesh position={[0, 1, 0]} rotation={[0, 0, 0]} ref={cone1Ref}>
           <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
-          <CustomeMaterial></CustomeMaterial>
+          <CustomMaterial></CustomMaterial>
         </mesh>
         <mesh position={[0, -1, 0]} rotation={[-Math.PI, 0, 0]} ref={cone2Ref}>
           <coneGeometry args={[1, 1.41, 4]}></coneGeometry>
-          <CustomeMaterial></CustomeMaterial>
+          <CustomMaterial></CustomMaterial>
         </mesh>
       </group>
     </Center>

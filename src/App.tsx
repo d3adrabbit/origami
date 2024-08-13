@@ -1,9 +1,11 @@
-import { OrbitControls, View } from "@react-three/drei";
+import { View } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { ReactNode, Suspense, useEffect } from "react";
-
+import { ReactNode, useEffect } from "react";
 import { Hero } from "./components/Hero";
 import { Item1 } from "./grid/Item1";
+import { Item10 } from "./grid/Item10";
+import { Item11 } from "./grid/Item11";
+import { Item12 } from "./grid/Item12";
 import { Item2 } from "./grid/Item2";
 import { Item3 } from "./grid/Item3";
 import { Item4 } from "./grid/Item4";
@@ -12,9 +14,6 @@ import { Item6 } from "./grid/Item6";
 import { Item7 } from "./grid/Item7";
 import { Item8 } from "./grid/Item8";
 import { Item9 } from "./grid/Item9";
-import { Item10 } from "./grid/Item10";
-import { Item11 } from "./grid/Item11";
-import { Item12 } from "./grid/Item12";
 
 const Wrapper = ({ name, children }: { name: string; children: ReactNode }) => {
   return (

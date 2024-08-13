@@ -1,8 +1,8 @@
 import { Center, Instance, Instances } from "@react-three/drei";
-import { useRef } from "react";
-import { CustomeMaterial } from "./material";
-import * as THREE from "three";
 import { GroupProps, useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import * as THREE from "three";
+import { CustomMaterial } from "./material";
 
 const radius = 3;
 const count = 8;
@@ -42,7 +42,7 @@ export const Item3 = () => {
         <group scale={0.6} ref={groupRef}>
           <Instances>
             <cylinderGeometry args={[1, 1, 0.1, 64]}></cylinderGeometry>
-            <CustomeMaterial></CustomeMaterial>
+            <CustomMaterial></CustomMaterial>
             {Array.from({ length: 8 }).map((_, index) => {
               return (
                 <Item
